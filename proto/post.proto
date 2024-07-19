@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package product;
+package post;
 
-service ProductService {
-  rpc CreatePost (CreateProductRequest) returns (CreateProductResponse) {}
+service PostService {
+  rpc CreatePost (CreatePostRequest) returns (CreatePostResponse) {}
   rpc FindOne (FindOneRequest) returns (FindOneResponse) {}
 }
 
-// CreateProduct
-message CreateProductRequest {
+// CreatePost
+message CreatePostRequest {
   string userId               = 1;
   string title                = 2;
   bool isDisplay              = 3;
@@ -35,7 +35,7 @@ message CreateProductRequest {
   optional string video6      = 24;
 }
 
-message CreateProductResponse {
+message CreatePostResponse {
   int32 status = 1;
   repeated string error = 2;
   int32 id = 3;
@@ -57,19 +57,19 @@ message FindOneData {
   optional int32 maxCapacity  = 11;
   optional string startDate   = 12;
   optional string endDate     = 13;
-  optional string description = 13;
-  optional string image1      = 14;
-  optional string image2      = 15;
-  optional string image3      = 16;
-  optional string image4      = 17;
-  optional string image5      = 18;
-  optional string image6      = 19;
-  optional string video1      = 20;
-  optional string video2      = 21;
-  optional string video3      = 22;
-  optional string video4      = 23;
-  optional string video5      = 24;
-  optional string video6      = 25;
+  optional string description = 14;
+  optional string image1      = 15;
+  optional string image2      = 16;
+  optional string image3      = 17;
+  optional string image4      = 18;
+  optional string image5      = 19;
+  optional string image6      = 20;
+  optional string video1      = 21;
+  optional string video2      = 22;
+  optional string video3      = 23;
+  optional string video4      = 24;
+  optional string video5      = 25;
+  optional string video6      = 26;
 }
 
 message FindOneRequest {
