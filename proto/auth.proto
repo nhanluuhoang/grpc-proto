@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package auth;
 
+import "google/protobuf/struct.proto";
+
 service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse) {}
   rpc Login (LoginRequest) returns (LoginResponse) {}
@@ -16,8 +18,8 @@ message RegisterRequest {
 
 message RegisterResponse {
   bool status = 1;
-  string message = 2;
-  repeated string errors = 3;
+  optional string message = 2;
+  optional google.protobuf.ListValue errors = 3;
 }
 
 // Login
@@ -29,8 +31,8 @@ message LoginRequest {
 
 message LoginResponse {
   bool status = 1;
-  string message = 2;
-  repeated string errors = 3;
+  optional string message = 2;
+  optional google.protobuf.ListValue errors = 3;
   string accessToken = 4;
   string refreshToken = 5;
 }
@@ -43,8 +45,8 @@ message ValidateRequest {
 
 message ValidateResponse {
   bool status = 1;
-  string message = 2;
-  repeated string errors = 3;
+  optional string message = 2;
+  optional google.protobuf.ListValue errors = 3;
   string userId = 4;
   string accessToken = 5;
 }
