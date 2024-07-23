@@ -17,22 +17,22 @@ message CreatePostRequest {
   int32 province              = 6;
   string place                = 7;
   int32 minCapacity           = 8;
-  optional int32 maxCapacity  = 9;
-  optional string startDate   = 10;
-  optional string endDate     = 11;
-  optional string description = 12;
-  optional string image1      = 13;
-  optional string image2      = 14;
-  optional string image3      = 15;
-  optional string image4      = 16;
-  optional string image5      = 17;
-  optional string image6      = 18;
-  optional string video1      = 19;
-  optional string video2      = 20;
-  optional string video3      = 21;
-  optional string video4      = 22;
-  optional string video5      = 23;
-  optional string video6      = 24;
+  int32 maxCapacity  = 9;
+  string startDate   = 10;
+  string endDate     = 11;
+  string description = 12;
+  string image1      = 13;
+  string image2      = 14;
+  string image3      = 15;
+  string image4      = 16;
+  string image5      = 17;
+  string image6      = 18;
+  string video1      = 19;
+  string video2      = 20;
+  string video3      = 21;
+  string video4      = 22;
+  string video5      = 23;
+  string video6      = 24;
 }
 
 message CreatePostResponse {
@@ -54,22 +54,22 @@ message FindOneData {
   int32 province              = 8;
   string place                = 9;
   int32 minCapacity           = 10;
-  optional int32 maxCapacity  = 11;
-  optional string startDate   = 12;
-  optional string endDate     = 13;
-  optional string description = 14;
-  optional string image1      = 15;
-  optional string image2      = 16;
-  optional string image3      = 17;
-  optional string image4      = 18;
-  optional string image5      = 19;
-  optional string image6      = 20;
-  optional string video1      = 21;
-  optional string video2      = 22;
-  optional string video3      = 23;
-  optional string video4      = 24;
-  optional string video5      = 25;
-  optional string video6      = 26;
+  int32 maxCapacity  = 11;
+  string startDate   = 12;
+  string endDate     = 13;
+  string description = 14;
+  string image1      = 15;
+  string image2      = 16;
+  string image3      = 17;
+  string image4      = 18;
+  string image5      = 19;
+  string image6      = 20;
+  string video1      = 21;
+  string video2      = 22;
+  string video3      = 23;
+  string video4      = 24;
+  string video5      = 25;
+  string video6      = 26;
 }
 
 message FindOneRequest {

@@ -15,8 +15,9 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-  int32 status = 1;
-  repeated string error = 2;
+  bool status = 1;
+  string message = 2;
+  repeated string errors = 3;
 }
 
 // Login
@@ -27,18 +28,23 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  string token = 3;
+  bool status = 1;
+  string message = 2;
+  repeated string errors = 3;
+  string accessToken = 4;
+  string refreshToken = 5;
 }
 
 // Validate
 message ValidateRequest {
-  string token = 1;
+  string accessToken = 1;
+  string refreshToken = 2;
 }
 
 message ValidateResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  int32 userId = 3;
+  bool status = 1;
+  string message = 2;
+  repeated string errors = 3;
+  string userId = 4;
+  string accessToken = 5;
 }
