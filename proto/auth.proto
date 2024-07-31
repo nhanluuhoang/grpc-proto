@@ -2,13 +2,51 @@ syntax = "proto3";
 
 package auth;
 
-import "google/protobuf/struct.proto";
-
 service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse) {}
   rpc Login (LoginRequest) returns (LoginResponse) {}
-  rpc Validate (ValidateRequest) returns (ValidateResponse) {}
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse) {}
+  rpc GetProfile (GetProfileRequest) returns (GetProfileResponse) {}
+  rpc UpdateProfile (UpdateProfileRequest) returns (UpdateProfileResponse) {}
+  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse) {}
+  rpc Logout (LogoutRequest) returns (LogoutResponse) {}
 }
+// --------------------------------------COMMON--------------------------------------
+message Detail {
+  string field = 1;
+  repeated string message = 2;
+  Detail children = 3;
+}
+
+message CommonError {
+  string title = 1;
+  repeated Detail details = 2;
+}
+
+message DataProfile {
+  string userId = 1;
+  string phone = 2;
+  string avatar = 3;
+  int32 gender = 4;
+  int64 dateOfBirth = 5;
+  int32 businessType = 6;
+  string nationality = 7;
+  bytes identity = 8;
+  bytes socialNetwork = 9;
+}
+
+message DataUser {
+  string id = 1;
+  string fullName = 2;
+  string email = 3;
+  optional DataProfile profile = 4;
+}
+
+message DataLogin {
+  string accessToken = 1;
+  string refreshToken = 2;
+}
+// --------------------------------------COMMON--------------------------------------
 
 // Register
 message RegisterRequest {
@@ -18,8 +56,7 @@ message RegisterRequest {
 
 message RegisterResponse {
   bool status = 1;
-  optional string message = 2;
-  optional google.protobuf.ListValue errors = 3;
+  optional CommonError error = 2;
 }
 
 // Login
@@ -31,22 +68,73 @@ message LoginRequest {
 
 message LoginResponse {
   bool status = 1;
-  optional string message = 2;
-  optional google.protobuf.ListValue errors = 3;
-  string accessToken = 4;
-  string refreshToken = 5;
+  optional CommonError error = 2;
+  optional DataLogin data = 3;
 }
 
 // Validate
-message ValidateRequest {
+message ValidateTokenRequest {
   string accessToken = 1;
   string refreshToken = 2;
 }
 
-message ValidateResponse {
+message ValidateTokenResponse {
   bool status = 1;
-  optional string message = 2;
-  optional google.protobuf.ListValue errors = 3;
-  string userId = 4;
-  string accessToken = 5;
+  optional CommonError error = 2;
+  optional DataValidateToken data = 3;
+
+  message DataValidateToken {
+    string userId = 1;
+    string accessToken = 2;
+  }
+}
+
+// GetProfile
+message GetProfileRequest {
+  string userId = 1;
+}
+
+message GetProfileResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+  optional DataUser data = 3;
+}
+
+// UpdateProfile
+message UpdateProfileRequest {
+  string phone = 1;
+  string avatar = 2;
+  int32 gender = 3;
+  int64 dateOfBirth = 5;
+  int32 businessType = 6;
+  string nationality = 7;
+  bytes identity = 8;
+  bytes socialNetwork = 9;
+}
+
+message UpdateProfileResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+}
+
+// ChangePassword
+message ChangePasswordRequest {
+  string password = 1;
+  string passwordConfirmation = 2;
+}
+
+message ChangePasswordResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+  optional DataLogin data = 3;
+}
+
+// Logout
+message LogoutRequest {
+  string userId = 1;
+}
+
+message LogoutResponse {
+  bool status = 1;
+  optional CommonError error = 2;
 }
