@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/struct.proto";
+
 package auth;
 
 service AuthService {
@@ -28,11 +30,11 @@ message DataProfile {
   string phone = 2;
   string avatar = 3;
   int32 gender = 4;
-  int64 dateOfBirth = 5;
+  string dateOfBirth = 5;
   int32 businessType = 6;
   string nationality = 7;
-  bytes identity = 8;
-  bytes socialNetwork = 9;
+  google.protobuf.Struct identity = 8;
+  google.protobuf.Struct socialNetwork = 9;
 }
 
 message DataUser {
@@ -72,7 +74,7 @@ message LoginResponse {
   optional DataLogin data = 3;
 }
 
-// Validate
+// ValidateToken
 message ValidateTokenRequest {
   string accessToken = 1;
   string refreshToken = 2;
@@ -102,14 +104,15 @@ message GetProfileResponse {
 
 // UpdateProfile
 message UpdateProfileRequest {
-  string phone = 1;
-  string avatar = 2;
-  int32 gender = 3;
-  int64 dateOfBirth = 5;
+  string userId = 1;
+  string phone = 2;
+  string avatar = 3;
+  int32 gender = 4;
+  string dateOfBirth = 5;
   int32 businessType = 6;
   string nationality = 7;
-  bytes identity = 8;
-  bytes socialNetwork = 9;
+  optional google.protobuf.Struct identity = 8;
+  optional google.protobuf.Struct socialNetwork = 9;
 }
 
 message UpdateProfileResponse {
