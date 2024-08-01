@@ -77,7 +77,7 @@ message LoginResponse {
 // ValidateToken
 message ValidateTokenRequest {
   string accessToken = 1;
-  string refreshToken = 2;
+  optional string refreshToken = 2;
 }
 
 message ValidateTokenResponse {
