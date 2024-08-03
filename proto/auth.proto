@@ -123,8 +123,9 @@ message UpdateProfileResponse {
 
 // ChangePassword
 message ChangePasswordRequest {
-  string password = 1;
-  string passwordConfirmation = 2;
+  string userId = 1;
+  string password = 2;
+  string passwordConfirmation = 3;
 }
 
 message ChangePasswordResponse {
