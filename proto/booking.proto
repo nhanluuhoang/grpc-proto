@@ -1,0 +1,142 @@
+syntax = "proto3";
+
+package booking;
+
+service BookingService {
+  rpc Booking (CreateBookingRequest) returns (CreateBookingResponse) {}
+  rpc GetListBooking (GetListBookingRequest) returns (GetListBookingResponse) {}
+  rpc GetBooking (GetBookingRequest) returns (GetBookingResponse) {}
+  rpc UpdateStatusBooking (UpdateStatusBookingRequest) returns (UpdateStatusBookingResponse) {}
+  rpc UpdateOutcomeBooking (UpdateOutcomeBookingRequest) returns (UpdateOutcomeBookingResponse) {}
+}
+
+// --------------------------------------COMMON--------------------------------------
+message Detail {
+  string field = 1;
+  repeated string message = 2;
+  Detail children = 3;
+}
+
+message CommonError {
+  string title = 1;
+  repeated Detail details = 2;
+}
+
+message DataBooking {
+  string id                   = 1;
+  string postId               = 2;
+  string partnerId            = 3;
+  string userId               = 4;
+  string title                = 5;
+  int64 price                 = 6;
+  string place                = 7;
+  int32 capacity              = 8;
+  optional string description = 9;
+  string startDate            = 10;
+  string endDate              = 11;
+
+  repeated Service services = 12;
+}
+
+message Service {
+  string id = 1;
+  string bookingId = 2;
+  string name = 3;
+  int64 price = 4;
+  bool isIncluded = 5;
+  optional string description = 6;
+}
+// --------------------------------------COMMON--------------------------------------
+
+// CreateBooking
+message CreateBookingRequest {
+  string postId               = 2;
+  string partnerId            = 3;
+  string userId               = 4;
+  string title                = 5;
+  int64 price                 = 6;
+  string place                = 7;
+  int32 capacity              = 8;
+  optional string description = 9;
+  string startDate            = 10;
+  string endDate              = 11;
+
+  repeated Service services = 12;
+}
+
+message CreateBookingResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+}
+
+// GetListBooking
+message GetListBookingRequest {
+  Search search = 1;
+  Sort sort = 2;
+  int32 page = 3;
+
+  message Search {
+    string title = 1;
+    string place = 2;
+  }
+
+  message Sort {
+    int64 price = 1;
+    int32 capacity = 2;
+    string startDate = 3;
+    string endDate = 4;
+  }
+}
+
+message GetListBookingResponse {
+  bool status = 1;
+  repeated DataBooking data = 2;
+}
+
+// GetBooking
+message GetBookingRequest {
+  string id = 1;
+}
+
+message GetBookingResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+  optional DataBooking data = 3;
+}
+
+// UpdateStatusBooking
+enum STATUS_CODE {
+  BOOKING = 0;
+  APPROVED = 1;
+  REJECT = 2;
+}
+
+message UpdateStatusBookingRequest {
+  string bookingId = 1;
+  STATUS_CODE code = 2;
+  optional string description = 3;
+}
+
+message UpdateStatusBookingResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+}
+
+// UpdateOutcomeBooking
+enum OUTCOME_CODE {
+  CANCELLED = 0;
+  WATTING = 1;
+  BOOKED = 2;
+  OK = 3;
+}
+
+message UpdateOutcomeBookingRequest {
+  string bookingId = 1;
+  OUTCOME_CODE code = 2;
+  optional string description = 3;
+}
+
+message UpdateOutcomeBookingResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+}

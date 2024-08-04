@@ -4,19 +4,78 @@ package post;
 
 service PostService {
   rpc CreatePost (CreatePostRequest) returns (CreatePostResponse) {}
-  rpc FindOne (FindOneRequest) returns (FindOneResponse) {}
+  rpc GetListPost (GetListPostRequest) returns (GetListPostResponse) {}
+  rpc GetPost (GetPostRequest) returns (GetPostResponse) {}
+  rpc UpdatePost (UpdatePostRequest) returns (UpdatePostResponse) {}
+  rpc DeletePost (DeletePostRequest) returns (DeletePostResponse) {}
 }
+
+// --------------------------------------COMMON--------------------------------------
+message Detail {
+  string field = 1;
+  repeated string message = 2;
+  Detail children = 3;
+}
+
+message CommonError {
+  string title = 1;
+  repeated Detail details = 2;
+}
+
+message DataPost {
+  string id          = 1;
+  string userId      = 2;
+  string title       = 3;
+  string slug        = 4;
+  bool isDisplay     = 5;
+  bool isPartner     = 6;
+  double price       = 7;
+  int32 province     = 8;
+  string place       = 9;
+  int32 minCapacity  = 10;
+  int32 maxCapacity  = 11;
+  string startDate   = 12;
+  string endDate     = 13;
+  string description = 14;
+  string thumbnail   = 15;
+  string image1      = 16;
+  string image2      = 17;
+  string image3      = 18;
+  string image4      = 19;
+  string image5      = 20;
+  string image6      = 21;
+  string video1      = 22;
+  string video2      = 23;
+  string video3      = 24;
+  string video4      = 25;
+  string video5      = 26;
+  string video6      = 27;
+  float avgPostRatting = 28;
+  float avgUserRatting = 29;
+
+  repeated Service services = 30;
+  repeated Service feedbacks = 31;
+}
+
+message Service {
+  string id = 1;
+  string name = 2;
+  int64 price = 3;
+  bool isIncluded = 4;
+  optional string description = 5;
+}
+// --------------------------------------COMMON--------------------------------------
 
 // CreatePost
 message CreatePostRequest {
-  string userId               = 1;
-  string title                = 2;
-  bool isDisplay              = 3;
-  bool isPartner              = 4;
-  double price                = 5;
-  int32 province              = 6;
-  string place                = 7;
-  int32 minCapacity           = 8;
+  string userId      = 1;
+  string title       = 2;
+  bool isDisplay     = 3;
+  bool isPartner     = 4;
+  double price       = 5;
+  int32 province     = 6;
+  string place       = 7;
+  int32 minCapacity  = 8;
   int32 maxCapacity  = 9;
   string startDate   = 10;
   string endDate     = 11;
@@ -33,27 +92,80 @@ message CreatePostRequest {
   string video4      = 22;
   string video5      = 23;
   string video6      = 24;
+  
+  repeated Service services = 25;
 }
 
 message CreatePostResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  int32 id = 3;
+  bool status = 1;
+  optional CommonError error = 2;
 }
 
-// FindOne
+// GetListPost
+message GetListPostRequest {
+  Search search = 1;
+  Sort sort = 2;
+  int32 page = 3;
 
-message FindOneData {
-  string id                   = 1;
-  string userId               = 2;
-  string title                = 3;
-  string slug                 = 4;
-  bool isDisplay              = 5;
-  bool isPartner              = 6;
-  double price                = 7;
-  int32 province              = 8;
-  string place                = 9;
-  int32 minCapacity           = 10;
+  message Search {
+    string title = 1;
+    string place = 2;
+    int32 province = 3;
+    repeated string services = 4;
+  }
+
+  message Sort {
+    int64 price = 1;
+    int32 avgPostRatting = 2;
+    int32 avgUserRatting = 3;
+  }
+}
+
+message GetListPostResponse {
+  bool status = 1;
+  repeated ListPost data = 2;
+
+  message ListPost {
+    string id          = 1;
+    string title       = 2;
+    string slug        = 3;
+    double price       = 4;
+    int32 province     = 5;
+    string place       = 6;
+    int32 minCapacity  = 7;
+    int32 maxCapacity  = 8;
+    string startDate   = 9;
+    string endDate     = 10;
+    string description = 11;
+    string thumbnail   = 12;
+    double avgPostRatting = 13;
+    double avgUserRatting = 14;
+  }
+}
+
+// GetPost
+message GetPostRequest {
+  string slug = 1;
+}
+
+message GetPostResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+  optional DataPost data = 3;
+}
+
+// UpdatePost
+message UpdatePostRequest {
+  string id          = 1;
+  string userId      = 2;
+  string title       = 3;
+  string slug        = 4;
+  bool isDisplay     = 5;
+  bool isPartner     = 6;
+  double price       = 7;
+  int32 province     = 8;
+  string place       = 9;
+  int32 minCapacity  = 10;
   int32 maxCapacity  = 11;
   string startDate   = 12;
   string endDate     = 13;
@@ -70,15 +182,22 @@ message FindOneData {
   string video4      = 24;
   string video5      = 25;
   string video6      = 26;
+
+  repeated Service services = 27;
 }
 
-message FindOneRequest {
-  int32 id = 1;
+message UpdatePostResponse {
+  bool status = 1;
+  optional CommonError error = 2;
 }
 
-message FindOneResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  FindOneData data = 3;
+// DeletePost
+message DeletePostRequest {
+  string id          = 1;
+  string userId      = 2;
 }
 
+message DeletePostResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+}
