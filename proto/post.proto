@@ -5,9 +5,11 @@ package post;
 service PostService {
   rpc CreatePost (CreatePostRequest) returns (CreatePostResponse) {}
   rpc GetListPost (GetListPostRequest) returns (GetListPostResponse) {}
+  // rpc GetListPostByUser (GetListPostRequest) returns (GetListPostResponse) {}
   rpc GetPost (GetPostRequest) returns (GetPostResponse) {}
   rpc UpdatePost (UpdatePostRequest) returns (UpdatePostResponse) {}
   rpc DeletePost (DeletePostRequest) returns (DeletePostResponse) {}
+  // rpc Suggestions (DeletePostRequest) returns (DeletePostResponse) {}
 }
 
 // --------------------------------------COMMON--------------------------------------
@@ -58,11 +60,16 @@ message DataPost {
 }
 
 message Service {
-  string id = 1;
+  optional string id = 1;
   string name = 2;
   int64 price = 3;
   bool isIncluded = 4;
   optional string description = 5;
+}
+
+enum SORT {
+  ASC = 0;
+  DESC = 1;
 }
 // --------------------------------------COMMON--------------------------------------
 
@@ -76,22 +83,22 @@ message CreatePostRequest {
   int32 province     = 6;
   string place       = 7;
   int32 minCapacity  = 8;
-  int32 maxCapacity  = 9;
-  string startDate   = 10;
-  string endDate     = 11;
+  optional int32 maxCapacity  = 9;
+  optional string startDate   = 10;
+  optional string endDate     = 11;
   string description = 12;
-  string image1      = 13;
-  string image2      = 14;
-  string image3      = 15;
-  string image4      = 16;
-  string image5      = 17;
-  string image6      = 18;
-  string video1      = 19;
-  string video2      = 20;
-  string video3      = 21;
-  string video4      = 22;
-  string video5      = 23;
-  string video6      = 24;
+  optional string image1      = 13;
+  optional string image2      = 14;
+  optional string image3      = 15;
+  optional string image4      = 16;
+  optional string image5      = 17;
+  optional string image6      = 18;
+  optional string video1      = 19;
+  optional string video2      = 20;
+  optional string video3      = 21;
+  optional string video4      = 22;
+  optional string video5      = 23;
+  optional string video6      = 24;
   
   repeated Service services = 25;
 }
@@ -103,21 +110,22 @@ message CreatePostResponse {
 
 // GetListPost
 message GetListPostRequest {
-  Search search = 1;
-  Sort sort = 2;
-  int32 page = 3;
+  string destination = 1;
 
-  message Search {
+  Filter filter = 2;
+  Sort sort = 3;
+  int32 page = 4;
+
+  message Filter {
     string title = 1;
-    string place = 2;
-    int32 province = 3;
-    repeated string services = 4;
+    string partnerName = 2;
+    repeated string services = 5;
   }
 
   message Sort {
-    int64 price = 1;
-    int32 avgPostRatting = 2;
-    int32 avgUserRatting = 3;
+    SORT price = 1;
+    SORT avgPostRatting = 2;
+    SORT avgUserRatting = 3;
   }
 }
 
@@ -159,31 +167,30 @@ message UpdatePostRequest {
   string id          = 1;
   string userId      = 2;
   string title       = 3;
-  string slug        = 4;
-  bool isDisplay     = 5;
-  bool isPartner     = 6;
-  double price       = 7;
-  int32 province     = 8;
-  string place       = 9;
-  int32 minCapacity  = 10;
-  int32 maxCapacity  = 11;
-  string startDate   = 12;
-  string endDate     = 13;
-  string description = 14;
-  string image1      = 15;
-  string image2      = 16;
-  string image3      = 17;
-  string image4      = 18;
-  string image5      = 19;
-  string image6      = 20;
-  string video1      = 21;
-  string video2      = 22;
-  string video3      = 23;
-  string video4      = 24;
-  string video5      = 25;
-  string video6      = 26;
-
-  repeated Service services = 27;
+  bool isDisplay     = 4;
+  bool isPartner     = 5;
+  double price       = 6;
+  int32 province     = 7;
+  string place       = 8;
+  int32 minCapacity  = 9;
+  optional int32 maxCapacity  = 10;
+  optional string startDate   = 11;
+  optional string endDate     = 12;
+  string description          = 13;
+  optional string image1      = 14;
+  optional string image2      = 15;
+  optional string image3      = 16;
+  optional string image4      = 17;
+  optional string image5      = 18;
+  optional string image6      = 19;
+  optional string video1      = 20;
+  optional string video2      = 21;
+  optional string video3      = 22;
+  optional string video4      = 23;
+  optional string video5      = 24;
+  optional string video6      = 25;
+  
+  repeated Service services = 26;
 }
 
 message UpdatePostResponse {

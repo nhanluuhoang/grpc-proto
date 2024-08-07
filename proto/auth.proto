@@ -12,6 +12,8 @@ service AuthService {
   rpc UpdateProfile (UpdateProfileRequest) returns (UpdateProfileResponse) {}
   rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse) {}
   rpc Logout (LogoutRequest) returns (LogoutResponse) {}
+
+  rpc ForgotPassword (ForgotPasswordRequest) returns (ForgotPasswordResponse) {}
 }
 // --------------------------------------COMMON--------------------------------------
 message Detail {
@@ -140,6 +142,16 @@ message LogoutRequest {
 }
 
 message LogoutResponse {
+  bool status = 1;
+  optional CommonError error = 2;
+}
+
+// ForgotPassword
+message ForgotPasswordRequest {
+  string email = 1;
+}
+
+message ForgotPasswordResponse {
   bool status = 1;
   optional CommonError error = 2;
 }
