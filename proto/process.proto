@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package process;
+
+service ProcessService {
+  // rpc GetImage (GetImageRequest) returns (GetImageResponse) {}
+  rpc SuggestAddress (SuggestAddressRequest) returns (SuggestAddressResponse) {}
+
+}
+
+// --------------------------------------COMMON--------------------------------------
+message Address {
+  string id = 1;
+  int32 contry = 2;
+  string contryName = 3;
+  int32 province = 4;
+  string provinceName = 5;
+  string place = 6;
+}
+// --------------------------------------COMMON--------------------------------------
+
+// message GetImageRequest {
+//   string path = 1;
+// }
+
+// message GetImageResponse {
+//   bool status = 1;
+//   repeated string data = 2;
+// }
+
+message SuggestAddressRequest {
+  string destination = 1;
+}
+
+message SuggestAddressResponse {
+  bool status = 1;
+  repeated string data = 2;
+}

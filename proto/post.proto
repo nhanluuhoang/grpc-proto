@@ -158,8 +158,7 @@ message GetPostRequest {
 
 message GetPostResponse {
   bool status = 1;
-  optional CommonError error = 2;
-  optional DataPost data = 3;
+  optional DataPost data = 2;
 }
 
 // UpdatePost
