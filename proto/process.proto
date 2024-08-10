@@ -3,31 +3,36 @@ syntax = "proto3";
 package process;
 
 service ProcessService {
-  // rpc GetImage (GetImageRequest) returns (GetImageResponse) {}
-  rpc SuggestAddress (SuggestAddressRequest) returns (SuggestAddressResponse) {}
+  rpc SuggestDestination(SuggestAddressRequest) returns (SuggestAddressResponse) {}
+  
+  rpc GetListImage(GetListImageRequest) returns (GetListImageResponse) {}
+  rpc GetImage(GetImageRequest) returns (GetImageResponse) {}
 
+  rpc GetListVideo(GetListVideoRequest) returns (GetListVideoResponse) {}
+  rpc GetVideo(GetVideoRequest) returns (GetVideoResponse) {}
 }
 
 // --------------------------------------COMMON--------------------------------------
+
 message Address {
-  string id = 1;
-  int32 contry = 2;
-  string contryName = 3;
-  int32 province = 4;
-  string provinceName = 5;
+  int32 id = 1;
+  int32 contryId = 2;
+  int32 provinceId = 3;
+  string contry = 4;
+  string province = 5;
   string place = 6;
 }
+
+message Image {
+  string path = 1;
+}
+
+message Video {
+  string path = 1;
+}
 // --------------------------------------COMMON--------------------------------------
 
-// message GetImageRequest {
-//   string path = 1;
-// }
-
-// message GetImageResponse {
-//   bool status = 1;
-//   repeated string data = 2;
-// }
-
+// Address
 message SuggestAddressRequest {
   string destination = 1;
 }
@@ -35,4 +40,44 @@ message SuggestAddressRequest {
 message SuggestAddressResponse {
   bool status = 1;
   repeated string data = 2;
+}
+
+// Image
+message GetListImageRequest {
+  string modelId = 1;
+  string model = 2;
+}
+
+message GetListImageResponse {
+  bool status = 1;
+  repeated Image data = 2;
+}
+
+message GetImageRequest {
+  string path = 1;
+}
+
+message GetImageResponse {
+  bool status = 1;
+  Image data = 2;
+}
+
+// Video
+message GetListVideoRequest {
+  string modelId = 1;
+  string model = 2;
+}
+
+message GetListVideoResponse {
+  bool status = 1;
+  repeated Video data = 2;
+}
+
+message GetVideoRequest {
+  string path = 1;
+}
+
+message GetVideoResponse {
+  bool status = 1;
+  Video data = 2;
 }

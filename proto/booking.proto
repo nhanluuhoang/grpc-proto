@@ -3,11 +3,13 @@ syntax = "proto3";
 package booking;
 
 service BookingService {
-  rpc Booking (CreateBookingRequest) returns (CreateBookingResponse) {}
-  rpc GetListBooking (GetListBookingRequest) returns (GetListBookingResponse) {}
-  rpc GetBooking (GetBookingRequest) returns (GetBookingResponse) {}
-  rpc UpdateStatusBooking (UpdateStatusBookingRequest) returns (UpdateStatusBookingResponse) {}
-  rpc UpdateOutcomeBooking (UpdateOutcomeBookingRequest) returns (UpdateOutcomeBookingResponse) {}
+  rpc Booking(CreateBookingRequest) returns (CreateBookingResponse) {}
+  rpc GetListBooking(GetListBookingRequest) returns (GetListBookingResponse) {}
+  rpc GetBooking(GetBookingRequest) returns (GetBookingResponse) {}
+  rpc UpdateStatusBooking(UpdateStatusBookingRequest)
+      returns (UpdateStatusBookingResponse) {}
+  rpc UpdateOutcomeBooking(UpdateOutcomeBookingRequest)
+      returns (UpdateOutcomeBookingResponse) {}
 }
 
 // --------------------------------------COMMON--------------------------------------
@@ -23,17 +25,17 @@ message CommonError {
 }
 
 message DataBooking {
-  string id                   = 1;
-  string postId               = 2;
-  string partnerId            = 3;
-  string userId               = 4;
-  string title                = 5;
-  int64 price                 = 6;
-  string place                = 7;
-  int32 capacity              = 8;
+  string id = 1;
+  string postId = 2;
+  string partnerId = 3;
+  string userId = 4;
+  string title = 5;
+  int64 price = 6;
+  string place = 7;
+  int32 capacity = 8;
   optional string description = 9;
-  string startDate            = 10;
-  string endDate              = 11;
+  string startDate = 10;
+  string endDate = 11;
 
   repeated Service services = 12;
 }
@@ -50,16 +52,16 @@ message Service {
 
 // CreateBooking
 message CreateBookingRequest {
-  string postId               = 2;
-  string partnerId            = 3;
-  string userId               = 4;
-  string title                = 5;
-  int64 price                 = 6;
-  string place                = 7;
-  int32 capacity              = 8;
+  string postId = 2;
+  string partnerId = 3;
+  string userId = 4;
+  string title = 5;
+  int64 price = 6;
+  string place = 7;
+  int32 capacity = 8;
   optional string description = 9;
-  string startDate            = 10;
-  string endDate              = 11;
+  string startDate = 10;
+  string endDate = 11;
 
   repeated Service services = 12;
 }
