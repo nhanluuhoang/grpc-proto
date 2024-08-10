@@ -14,6 +14,7 @@ service AuthService {
   rpc Logout(LogoutRequest) returns (LogoutResponse) {}
 
   rpc ForgotPassword(ForgotPasswordRequest) returns (ForgotPasswordResponse) {}
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {}
 }
 // --------------------------------------COMMON--------------------------------------
 message Detail {
@@ -153,5 +154,15 @@ message ForgotPasswordRequest {
 
 message ForgotPasswordResponse {
   bool status = 1;
-  optional CommonError error = 2;
+}
+
+// ResetPassword
+message ResetPasswordRequest{
+  string token = 1;
+  string password = 2;
+  string passwordConfirmation = 3;
+}
+
+message ResetPasswordResponse {
+  bool status = 1;
 }
