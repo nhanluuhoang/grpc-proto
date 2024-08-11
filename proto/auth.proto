@@ -20,7 +20,7 @@ service AuthService {
 message Detail {
   string field = 1;
   repeated string message = 2;
-  Detail children = 3;
+  repeated Detail children = 3;
 }
 
 message CommonError {

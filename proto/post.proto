@@ -16,7 +16,7 @@ service PostService {
 message Detail {
   string field = 1;
   repeated string message = 2;
-  Detail children = 3;
+  repeated Detail children = 3;
 }
 
 message CommonError {
@@ -168,7 +168,7 @@ message UpdatePostRequest {
   string title = 3;
   bool isDisplay = 4;
   bool isPartner = 5;
-  string price = 6;
+  double price = 6;
   string province = 7;
   string place = 8;
   int32 minCapacity = 9;
