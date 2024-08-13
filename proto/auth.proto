@@ -154,6 +154,7 @@ message ForgotPasswordRequest {
 
 message ForgotPasswordResponse {
   bool status = 1;
+  optional CommonError error = 2;
 }
 
 // ResetPassword
