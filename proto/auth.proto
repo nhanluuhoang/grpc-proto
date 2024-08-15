@@ -166,4 +166,5 @@ message ResetPasswordRequest{
 
 message ResetPasswordResponse {
   bool status = 1;
+  optional CommonError error = 2;
 }

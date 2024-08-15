@@ -30,7 +30,7 @@ message DataBooking {
   string partnerId = 3;
   string userId = 4;
   string title = 5;
-  int64 price = 6;
+  double price = 6;
   string place = 7;
   int32 capacity = 8;
   optional string description = 9;
@@ -42,28 +42,22 @@ message DataBooking {
 
 message Service {
   string id = 1;
-  string bookingId = 2;
-  string name = 3;
-  int64 price = 4;
-  bool isIncluded = 5;
-  optional string description = 6;
+  optional string description = 2;
 }
 // --------------------------------------COMMON--------------------------------------
 
 // CreateBooking
 message CreateBookingRequest {
-  string postId = 2;
-  string partnerId = 3;
-  string userId = 4;
-  string title = 5;
-  int64 price = 6;
-  string place = 7;
-  int32 capacity = 8;
-  optional string description = 9;
-  string startDate = 10;
-  string endDate = 11;
+  string postId = 1;
+  string partnerId = 2;
+  string userId = 3;
+  int32 capacity = 4;
+  double price = 5;
+  optional string description = 6;
+  string startDate = 7;
+  string endDate = 8;
 
-  repeated Service services = 12;
+  repeated Service services = 9;
 }
 
 message CreateBookingResponse {
@@ -80,6 +74,7 @@ message GetListBookingRequest {
   message Search {
     string title = 1;
     string place = 2;
+    string province = 3;
   }
 
   message Sort {
