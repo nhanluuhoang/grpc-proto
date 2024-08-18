@@ -64,7 +64,6 @@ message CreateBookingRequest {
   string endDate = 8;
 
   repeated BookingServices bookingServices = 9;
-  repeated BookingFreeService bookingFreeServices = 10;
 }
 
 message CreateBookingResponse {

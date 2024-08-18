@@ -63,6 +63,25 @@ message DataPost {
   string video6 = 27;
   float avgPostRatting = 28;
   float avgUserRatting = 29;
+
+  repeated Service services = 30;
+    repeated FreeService freeServices = 31;
+    
+    message Service {
+      optional string id = 1;
+      string serviceTypeId = 2;
+      string name = 3;
+      double price = 4;
+      string currency = 5;
+      optional string description = 6;
+    }
+  
+    message FreeService {
+      optional string id = 1;
+      string serviceTypeId = 2;
+      string name = 3;
+      optional string description = 4;
+    }
 }
 // --------------------------------------COMMON--------------------------------------
 
