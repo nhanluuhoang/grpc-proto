@@ -10,6 +10,8 @@ service ProcessService {
 
   rpc GetListVideo(GetListVideoRequest) returns (GetListVideoResponse) {}
   rpc GetVideo(GetVideoRequest) returns (GetVideoResponse) {}
+
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {}
 }
 
 // --------------------------------------COMMON--------------------------------------
@@ -29,6 +31,38 @@ message Image {
 
 message Video {
   string path = 1;
+}
+
+message DataPost {
+  string id = 1;
+  string userId = 2;
+  string addressId = 3;
+  string title = 4;
+  string slug = 5;
+  bool isPartner = 6;
+  bool isDisplay = 7;
+  string endDateDisplay = 8;
+  double price = 9;
+  string currency = 10;
+  string destination = 11;
+  int32 minCapacity = 12;
+  int32 maxCapacity = 13;
+  string description = 14;
+  string thumbnail = 15;
+  string image1 = 16;
+  string image2 = 17;
+  string image3 = 18;
+  string image4 = 19;
+  string image5 = 20;
+  string image6 = 21;
+  string video1 = 22;
+  string video2 = 23;
+  string video3 = 24;
+  string video4 = 25;
+  string video5 = 26;
+  string video6 = 27;
+  float avgPostRatting = 28;
+  float avgUserRatting = 29;
 }
 // --------------------------------------COMMON--------------------------------------
 
@@ -80,4 +114,14 @@ message GetVideoRequest {
 message GetVideoResponse {
   bool status = 1;
   Video data = 2;
+}
+
+// GetPost
+message GetPostRequest {
+  string id = 1;
+}
+
+message GetPostResponse {
+  bool status = 1;
+  optional DataPost data = 2;
 }

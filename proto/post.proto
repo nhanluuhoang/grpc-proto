@@ -9,7 +9,6 @@ service PostService {
   rpc GetPost(GetPostRequest) returns (GetPostResponse) {}
   rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse) {}
   rpc DeletePost(DeletePostRequest) returns (DeletePostResponse) {}
-  // rpc Suggestions (DeletePostRequest) returns (DeletePostResponse) {}
 }
 
 // --------------------------------------COMMON--------------------------------------
@@ -27,17 +26,17 @@ message CommonError {
 message DataPost {
   string id = 1;
   string userId = 2;
-  string title = 3;
-  string slug = 4;
-  bool isDisplay = 5;
+  string addressId = 3;
+  string title = 4;
+  string slug = 5;
   bool isPartner = 6;
-  double price = 7;
-  string province = 8;
-  string place = 9;
-  int32 minCapacity = 10;
-  int32 maxCapacity = 11;
-  string startDate = 12;
-  string endDate = 13;
+  bool isDisplay = 7;
+  string endDateDisplay = 8;
+  double price = 9;
+  string currency = 10;
+  string destination = 11;
+  int32 minCapacity = 12;
+  int32 maxCapacity = 13;
   string description = 14;
   string thumbnail = 15;
   string image1 = 16;
@@ -56,15 +55,23 @@ message DataPost {
   float avgUserRatting = 29;
 
   repeated Service services = 30;
-  repeated Service feedbacks = 31;
+  repeated FreeService freeServices = 31;
 }
 
 message Service {
   optional string id = 1;
-  string name = 2;
-  double price = 3;
-  bool isIncluded = 4;
-  optional string description = 5;
+  string serviceTypeId = 2;
+  string name = 3;
+  double price = 4;
+  string currency = 5;
+  optional string description = 6;
+}
+
+message FreeService {
+  optional string id = 1;
+  string serviceTypeId = 2;
+  string name = 3;
+  optional string description = 4;
 }
 
 enum SORT {
@@ -76,31 +83,31 @@ enum SORT {
 // CreatePost
 message CreatePostRequest {
   string userId = 1;
-  string title = 2;
-  bool isDisplay = 3;
-  bool isPartner = 4;
-  double price = 5;
-  string province = 6;
-  string place = 7;
+  string addressId = 2;
+  string title = 3;
+  bool isDisplay = 4;
+  bool isPartner = 5;
+  double price = 6;
+  string destination = 7;
   int32 minCapacity = 8;
   optional int32 maxCapacity = 9;
-  optional string startDate = 10;
-  optional string endDate = 11;
-  string description = 12;
-  optional string image1 = 13;
-  optional string image2 = 14;
-  optional string image3 = 15;
-  optional string image4 = 16;
-  optional string image5 = 17;
-  optional string image6 = 18;
-  optional string video1 = 19;
-  optional string video2 = 20;
-  optional string video3 = 21;
-  optional string video4 = 22;
-  optional string video5 = 23;
-  optional string video6 = 24;
+  optional string endDateDisplay = 10;
+  string description = 11;
+  optional string image1 = 12;
+  optional string image2 = 13;
+  optional string image3 = 14;
+  optional string image4 = 15;
+  optional string image5 = 16;
+  optional string image6 = 17;
+  optional string video1 = 18;
+  optional string video2 = 19;
+  optional string video3 = 20;
+  optional string video4 = 21;
+  optional string video5 = 22;
+  optional string video6 = 23;
 
-  repeated Service services = 25;
+  repeated Service services = 24;
+  repeated Service freeService = 25;
 }
 
 message CreatePostResponse {
@@ -111,21 +118,20 @@ message CreatePostResponse {
 // GetListPost
 message GetListPostRequest {
   string destination = 1;
-
   Filter filter = 2;
   Sort sort = 3;
   int32 page = 4;
 
   message Filter {
-    string title = 1;
-    string partnerName = 2;
-    repeated string services = 5;
+    optional int64 priceFrom = 1;
+    optional int64 priceTo = 2;
+    optional int32 gtPostRatting = 3;
+    optional int32 gtUserRatting = 4;
   }
 
   message Sort {
-    SORT price = 1;
-    SORT avgPostRatting = 2;
-    SORT avgUserRatting = 3;
+    optional SORT latest = 1;
+    optional SORT price = 2;
   }
 }
 
@@ -138,16 +144,13 @@ message GetListPostResponse {
     string title = 2;
     string slug = 3;
     double price = 4;
-    string province = 5;
-    string place = 6;
-    int32 minCapacity = 7;
-    int32 maxCapacity = 8;
-    string startDate = 9;
-    string endDate = 10;
-    string description = 11;
-    string thumbnail = 12;
-    double avgPostRatting = 13;
-    double avgUserRatting = 14;
+    string destination = 5;
+    int32 minCapacity = 6;
+    int32 maxCapacity = 7;
+    string description = 10;
+    string thumbnail = 11;
+    double avgPostRatting = 12;
+    double avgUserRatting = 13;
   }
 }
 

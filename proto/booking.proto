@@ -49,15 +49,14 @@ message Service {
 // CreateBooking
 message CreateBookingRequest {
   string postId = 1;
-  string partnerId = 2;
-  string userId = 3;
-  int32 capacity = 4;
-  double price = 5;
-  optional string description = 6;
-  string startDate = 7;
-  string endDate = 8;
+  string userBookingId = 2;
+  int32 capacity = 3;
+  double price = 4;
+  optional string description = 5;
+  string startDate = 6;
+  string endDate = 7;
 
-  repeated Service services = 9;
+  repeated Service services = 8;
 }
 
 message CreateBookingResponse {
