@@ -37,15 +37,16 @@ message DataBooking {
   string startDate = 10;
   string endDate = 11;
 
-  repeated Service services = 12;
+  repeated BookingServices bookingServices = 12;
+  repeated BookingFreeService bookingFreeService = 13;
 }
 
-message Service {
+message BookingServices {
   string id = 1;
   optional string description = 2;
 }
 
-message FreeService {
+message BookingFreeService {
   string id = 1;
   optional string description = 2;
 }
@@ -62,8 +63,8 @@ message CreateBookingRequest {
   string startDate = 7;
   string endDate = 8;
 
-  repeated Service services = 9;
-  repeated FreeService freeServices = 10;
+  repeated BookingServices bookingServices = 9;
+  repeated BookingFreeService bookingFreeServices = 10;
 }
 
 message CreateBookingResponse {
