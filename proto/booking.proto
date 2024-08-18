@@ -44,19 +44,26 @@ message Service {
   string id = 1;
   optional string description = 2;
 }
+
+message FreeService {
+  string id = 1;
+  optional string description = 2;
+}
 // --------------------------------------COMMON--------------------------------------
 
 // CreateBooking
 message CreateBookingRequest {
   string postId = 1;
-  string userBookingId = 2;
+  string userId = 2;
   int32 capacity = 3;
-  double price = 4;
-  optional string description = 5;
-  string startDate = 6;
-  string endDate = 7;
+  double totalPrice = 4;
+  string currency = 5;
+  optional string description = 6;
+  string startDate = 7;
+  string endDate = 8;
 
-  repeated Service services = 8;
+  repeated Service services = 9;
+  repeated FreeService freeServices = 10;
 }
 
 message CreateBookingResponse {
